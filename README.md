@@ -171,7 +171,7 @@ public final class Energy {
 ...
 }
 ```
-Deben localizarse en la clase jUnit 5 siguiente que se localizará en la carpeta `src/test/java` en el mismo paquete `com.calso.robot.domain.valueobjects`:
+Deben localizarse en la clase jUnit 5 siguiente, que se localizará en la carpeta `src/test/java` y en el mismo paquete `com.calso.robot.domain.valueobjects`:
 
 ```java
 package com.calso.robot.domain.valueobjects;
