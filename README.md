@@ -73,6 +73,85 @@ flowchart TB
 
 El diagrama es una visión arquitectónica, no sustituye la [especificación de comportamiento](docs/specification.md), que es la referencia para diseñar los casos de prueba.
 
+## Estructura del repositorio de GitHub
+
+Cada grupo dispone de un único repositorio para todas las prácticas. Dentro de él se encuentra el proyecto Maven de la segunda práctica:
+
+```text
+Repositorio-del-grupo/
+├── .github/
+│   └── workflows/
+│       └── p2-quality.yml
+├── P1/
+└── P2/
+    ├── README_P2.md
+    ├── docs/
+    └── P2_INICIALES/ (Cambiar las iniciales por las que correspondan)
+        ├── pom.xml
+        └── src/
+```
+
+Para conectar las acciones de GitHub con la herramienta externa configuraremos un flujo de trabajo. El workflow se guardará en **`.github/workflows/` de la raíz del repositorio**, no dentro de la carpeta `P2/` ni del proyecto Java. La ruta exacta al proyecto Maven será `P2/P2_INICIALES/`.
+
+LA estructura del archivo `.yml` será la siguiente, modificando las rutas pertinentes:
+
+```yml
+name: P2 - Analisis SonarQube
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'P2/P2_INICIALES/**'
+      - '.github/workflows/p2-quality.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: P2/P"_INICIALES
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+          cache-dependency-path: P2/P2_INICIALES/pom.xml
+      - name: Pruebas JUnit e informe JaCoCo
+        run: mvn -B clean verify
+      - name: Comprobar configuracion
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+          SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
+        run: |
+          test -n "$SONAR_TOKEN" || { echo 'Falta SONAR_TOKEN'; exit 1; }
+          test -n "$SONAR_HOST_URL" || { echo 'Falta SONAR_HOST_URL'; exit 1; }
+          test -n "$SONAR_PROJECT_KEY" || { echo 'Falta SONAR_PROJECT_KEY'; exit 1; }
+      - name: Publicar analisis en SonarQube
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+          SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
+        run: >
+          mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:5.1.0.4751:sonar
+          -Dsonar.projectKey="$SONAR_PROJECT_KEY"
+          -Dsonar.host.url="$SONAR_HOST_URL"
+          -Dsonar.token="$SONAR_TOKEN"
+          -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+```
+
+En grupos de dos, uno de los integrantes puede configurar los permisos y secretos, siempre que disponga de autorización en GitHub. No hace falta que ambos creen tokens ni duplicar la configuración.
+
 ## 1. Preparación y pruebas en Eclipse
 
 Importad `robot-cleaning/` mediante **File → Import → Maven → Existing Maven Projects**. Comprobad que Eclipse reconoce las fuentes de producción y las de pruebas. Leed primero la especificación y diseñad casos con datos normales, valores límite, situaciones inválidas y comportamientos de igualdad u ordenación, según corresponda.
