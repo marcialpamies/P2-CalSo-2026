@@ -158,6 +158,8 @@ Importad `robot-cleaning/` mediante **File → Import → Maven → Existing Mav
 
 Consultad también la documentación oficial de **JUnit 5**, especialmente Jupiter, las aserciones y la ejecución de pruebas: [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/). No es necesario reproducir el manual en el informe, pero sí aplicar correctamente las herramientas del framework.
 
+### Localización de las pruebas asociadas a una clase concreta
+
 ### Consulta rápida de JUnit 5
 
 Una prueba escrita con Jupiter suele utilizar `@Test`. Cada método prepara sus datos, ejecuta una operación y comprueba el resultado esperado. Por ejemplo:
@@ -361,7 +363,7 @@ No se evalúa la edición del vídeo, pero sí su legibilidad, el sonido, la dur
 
 Alojad el vídeo en una plataforma externa, como **YouTube, con visibilidad «Oculto/No listado»**, accesible mediante un enlace directo sin solicitar permisos adicionales. No es necesario hacerlo público.
 
-Incluid el enlace de reproducción en este `README_P2.md` y comprobad que funciona desde otra sesión o navegador. El profesorado podrá realizar una comprobación individual breve si necesita verificar la comprensión de los resultados presentados.
+Incluid el enlace de reproducción en este `README_P2.md` y comprobad que funciona desde otra sesión o navegador. El profesorado podrá realizar una entrevista individual breve si necesita verificar la comprensión de los resultados presentados.
 
 ## 4. Qué debéis entregar
 
