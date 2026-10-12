@@ -71,7 +71,7 @@ flowchart TB
 
 **Cómo interpretarlo:** los elementos **verdes** pertenecen al slice y los **rojos** están fuera de su alcance o no se implementan en esta práctica. La interfaz `ICleaningInventory` está situada en la **capa de dominio**, aunque sea utilizada por el caso de uso de aplicación. El inventario real no se implementa: en las pruebas del caso de uso se desarrolla `StubCleaningInventory` dentro de `src/test/java`, para controlar las existencias sin depender de infraestructura real.
 
-El diagrama es una visión arquitectónica, no sustituye la [especificación de comportamiento](robot-cleaning/docs/specification.md), que es la referencia para diseñar los casos de prueba.
+El diagrama es una visión arquitectónica, no sustituye la [especificación de comportamiento](docs/specification.md), que es la referencia para diseñar los casos de prueba.
 
 ## 1. Preparación y pruebas en Eclipse
 
