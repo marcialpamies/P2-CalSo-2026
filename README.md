@@ -158,6 +158,8 @@ Importad `robot-cleaning/` mediante **File → Import → Maven → Existing Mav
 
 Consultad también la documentación oficial de **JUnit 5**, especialmente Jupiter, las aserciones y la ejecución de pruebas: [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/). No es necesario reproducir el manual en el informe, pero sí aplicar correctamente las herramientas del framework.
 
+Como guía rápida para la creación de pruebas con jUnit 5 puedes consultar el documento: [Crear y ejecutar test](docs/Crear_y_ejecutar_tests.md). Además, se puede consultar la guía rápida de jUnit del curso pasado: [Guía jUnit del curso 2026](https://github.com/marcialpamies/P2-CalSo/blob/main/docs/manual_JUnit5.md).
+
 ### Localización de las pruebas asociadas a una clase concreta
 
 Las clases de jUnit 5 que contengan los casos de prueba de una clase concreta `ClaseDePrueba.java`, localizada en el paquete `paquete.de.clase` de la carpeta `src` deberán localizarse en el mismo paquete `paquete.de.clase` pero en la carpeta `test` y se nombrarán siguiendo el convenio `testClaseDePrueba.java`. 
