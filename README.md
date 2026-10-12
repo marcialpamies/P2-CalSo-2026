@@ -160,6 +160,32 @@ Consultad también la documentación oficial de **JUnit 5**, especialmente Jupit
 
 ### Localización de las pruebas asociadas a una clase concreta
 
+Las clases de jUnit 5 que contengan los casos de prueba de una clase concreta `ClaseDePrueba.java`, localizada en el paquete `paquete.de.clase` de la carpeta `src` deberán localizarse en el mismo paquete `paquete.de.clase` pero en la carpeta `test` y se nombrarán siguiendo el convenio `testClaseDePrueba.java`. 
+
+Por ejemplo, las pruebas de la clase siguiente que se encuentran en la carpeta del proyecto `src/main/java` en el paquete `com.calso.robot.domain.valueobjects`
+
+```java
+package com.calso.robot.domain.valueobjects;
+
+public final class Energy {
+...
+}
+```
+Deben localizarse en la clase jUnit 5 siguiente que se localizará en la carpeta `src/test/java` en el mismo paquete `com.calso.robot.domain.valueobjects`:
+
+```java
+package com.calso.robot.domain.valueobjects;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class EnergyTest {
+...
+}
+```
+De esta forma las pruebas quedan alineadas con la estructura de la arquitectura seleccionada.
+
+
 ### Consulta rápida de JUnit 5
 
 Una prueba escrita con Jupiter suele utilizar `@Test`. Cada método prepara sus datos, ejecuta una operación y comprueba el resultado esperado. Por ejemplo:
